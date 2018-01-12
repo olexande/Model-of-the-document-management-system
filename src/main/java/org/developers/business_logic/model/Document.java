@@ -2,7 +2,7 @@ package org.developers.business_logic.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-//Миронов - Внедрение  документов и отчётов
+//Миронов - Внедрение  документов и отчётов{
 
 //описание любого документа
 public interface Document extends Serializable {
@@ -29,3 +29,4 @@ public interface Document extends Serializable {
     //todo: правила подписи ещё не определены
     void signature(Object o1, Object o2);
 }
+//Миронов - Внедрение  документов и отчётов}

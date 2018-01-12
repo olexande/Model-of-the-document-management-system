@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//Миронов - настройка инициализации
+//Миронов - Внедрение  документов и отчётов{
 //первоначальная инициализация
 public class Initialization {
 
@@ -50,3 +50,4 @@ public class Initialization {
         //System.out.println(createFolderDocuments ? "Папка \"documents\" создана" : "Папка \"documents\" не создана");
     }
 }
+///Миронов - Внедрение  документов и отчётов}
