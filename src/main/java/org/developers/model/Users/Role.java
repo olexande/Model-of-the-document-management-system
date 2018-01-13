@@ -1,24 +1,23 @@
-package org.developers.model;
+package org.developers.model.Users;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-//Миронов - Внедрение пользователей{
+//Миронов - Внедрение ролей{
 //Типичный пользователь
 //todo: необходима доработка
-public class User {
+@AllArgsConstructor
+public class Role {
     //имя пользователя
     @Getter
-    @Setter
     private String name;
 
     //права пользователя
     @Getter
-    @Setter
     private LinkedHashMap<Rights, Boolean> rights;
 
     //изменение прав
@@ -26,12 +25,11 @@ public class User {
 
         Optional<Rights> rightOptional = Optional.of(right);
 
-        boolean fact = false;
-        for (Map.Entry<Rights, Boolean> rigthMap : rights.entrySet()) {
-            if (rightOptional.orElse(Rights.LOGIN).equals(rigthMap.getKey())) {
+        for (Map.Entry<Rights, Boolean> pointOfMapOfRights : rights.entrySet()) {
+            if (rightOptional.orElse(Rights.LOGIN).equals(pointOfMapOfRights.getKey())) {
                 rights.put(rightOptional.orElse(Rights.LOGIN), resolution);
             }
         }
     }
 }
-//Миронов - Внедрение пользователей}
+//Миронов - Внедрение ролей}
