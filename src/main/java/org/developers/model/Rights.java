@@ -1,4 +1,4 @@
-package org.developers.business_logic.model;
+package org.developers.model;
 
 public enum Rights {
     LOGIN,

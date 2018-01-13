@@ -1,6 +1,5 @@
-package org.developers.business_logic.model;
+package org.developers.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
