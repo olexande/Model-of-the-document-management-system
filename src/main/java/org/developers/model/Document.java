@@ -1,4 +1,4 @@
-package org.developers.business_logic.model;
+package org.developers.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,6 +6,9 @@ import java.time.LocalDate;
 
 //описание любого документа
 public interface Document extends Serializable {
+    //тип документа
+    TypeOfDocument getType();
+
     //todo: правила наименования документа: "Имя документа №[номер_документа] от [дата_проводки]"
     //наименование документа
     String getTitle();
