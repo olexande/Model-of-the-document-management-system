@@ -1,4 +1,4 @@
 .idea/
 target/
 test/
-Model-of-the-document-management-system.iml
+*.iml
