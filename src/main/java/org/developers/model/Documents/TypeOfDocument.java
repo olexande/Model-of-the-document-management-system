@@ -1,4 +1,4 @@
-package org.developers.model;
+package org.developers.model.Documents;
 
 import lombok.Getter;
 

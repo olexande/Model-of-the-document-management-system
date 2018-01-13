@@ -1,4 +1,4 @@
-package org.developers.model;
+package org.developers.model.Documents;
 
 //Миронов - Внедрение  документов и отчётов{
 //Журнал документов

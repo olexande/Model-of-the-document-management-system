@@ -1,4 +1,4 @@
-package org.developers.model;
+package org.developers.model.Documents;
 
 import java.io.Serializable;
 import java.time.LocalDate;
