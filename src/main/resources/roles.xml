@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--Миронов - Внедрение ролей{-->
+    <bean id="admin" class="org.developers.model.Users.Role">
+        <constructor-arg value="admin"/>
+        <constructor-arg>
+                <map>
+                    <entry key="#{T(org.developers.model.Users.Rights).LOGIN}" value="true"/>
+                    <entry key="#{T(org.developers.model.Users.Rights).CREATE_DOCUMENT}" value="true"/>
+                    <entry key="#{T(org.developers.model.Users.Rights).SAVE_DOCUMENT}" value="true"/>
+                    <entry key="#{T(org.developers.model.Users.Rights).WRITE_DOCUMENT}" value="true"/>
+                    <entry key="#{T(org.developers.model.Users.Rights).CANCELED_WRITE_OF_DOCUMENT}" value="true"/>
+                    <entry key="#{T(org.developers.model.Users.Rights).DELETE_DOCUMENT}" value="true"/>
+                </map>
+        </constructor-arg>
+    </bean>
+    <!--Миронов - внедренеи ролей}-->
+
+</beans>
