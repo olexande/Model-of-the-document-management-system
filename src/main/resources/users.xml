@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:map="http://www.springframework.org/schema/c"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <map:util id="for-store-manager">
+        <entry key="#{T(org.developers.business_logic.model.Rights).LOGIN" value="true"/>
+    </map:util>
+
+
+    <bean id="store-manager" class="org.developers.business_logic.model.User">
+        <property name="name" value="управялющий торговой точкой"/>
+        <property name="rights" ref="for-store-manager"/>
+    </bean>
+</beans>
