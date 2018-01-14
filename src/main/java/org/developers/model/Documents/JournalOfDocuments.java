@@ -6,9 +6,6 @@ public interface JournalOfDocuments {
     //название журнала
     String getTitle();
 
-    //тип документов
-    TypeOfDocument getType();
-
     //получение документов
     Document getDocument();
 }
