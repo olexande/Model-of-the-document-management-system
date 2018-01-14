@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--Миронов - Внедрение ролей{-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          p:driverClassName="org.postgresql.Driver"
+          p:url="jdbc:postgresql://localhost:5432/bookstore"
+          p:username="admin"
+          p:password="admin"/>
+
+    <bean id="person" class="org.developers.Person">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <!--Миронов - Внедрение ролей}-->
+
+</beans>
