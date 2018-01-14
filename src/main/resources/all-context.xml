@@ -5,6 +5,7 @@
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--Миронов - Внедрение ролей{-->
     <import resource="roles.xml"/>
+    <import resource="positions.xml"/>
     <!--Миронов - Внедрение ролей}-->
 
 </beans>

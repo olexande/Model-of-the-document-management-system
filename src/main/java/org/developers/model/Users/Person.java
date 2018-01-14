@@ -6,10 +6,10 @@ import java.util.Optional;
 //Миронов - Внедрение ролей{
 //человек
 public abstract class Person {
-    abstract String getLastname();
-    abstract String getFirstname();
-    abstract String getPatronymic();
-    abstract LocalDate getBirthday();
+    public abstract String getLastname();
+    public abstract String getFirstname();
+    public abstract String getPatronymic();
+    public abstract LocalDate getBirthday();
 
     public String getName(String type) {
         String result = null;
@@ -20,7 +20,7 @@ public abstract class Person {
                 break;
             }
             case "abbr": {
-                result = getLastname() + " " + getFirstname().substring(1, 1) + ". " + getPatronymic().substring(1, 1) + ".";
+                result = getLastname() + " " + getFirstname().substring(0, 1) + ". " + getPatronymic().substring(0, 1) + ".";
                 break;
             }
             default:

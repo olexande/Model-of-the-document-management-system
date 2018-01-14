@@ -4,6 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--Миронов - Внедрение ролей{-->
+    <bean id="untitled" class="org.developers.model.Users.Role">
+        <constructor-arg value="untitled"/>
+        <constructor-arg>
+            <map>
+                <entry key="#{T(org.developers.model.Users.Rights).LOGIN}" value="false"/>
+                <entry key="#{T(org.developers.model.Users.Rights).CREATE_DOCUMENT}" value="false"/>
+                <entry key="#{T(org.developers.model.Users.Rights).SAVE_DOCUMENT}" value="false"/>
+                <entry key="#{T(org.developers.model.Users.Rights).WRITE_DOCUMENT}" value="false"/>
+                <entry key="#{T(org.developers.model.Users.Rights).CANCELED_WRITE_OF_DOCUMENT}" value="false"/>
+                <entry key="#{T(org.developers.model.Users.Rights).DELETE_DOCUMENT}" value="false"/>
+            </map>
+        </constructor-arg>
+    </bean>
     <bean id="admin" class="org.developers.model.Users.Role">
         <constructor-arg value="admin"/>
         <constructor-arg>
@@ -15,6 +28,19 @@
                     <entry key="#{T(org.developers.model.Users.Rights).CANCELED_WRITE_OF_DOCUMENT}" value="true"/>
                     <entry key="#{T(org.developers.model.Users.Rights).DELETE_DOCUMENT}" value="true"/>
                 </map>
+        </constructor-arg>
+    </bean>
+    <bean id="co-worker" class="org.developers.model.Users.Role">
+        <constructor-arg value="co-worker"/>
+        <constructor-arg>
+            <map>
+                <entry key="#{T(org.developers.model.Users.Rights).LOGIN}" value="true"/>
+                <entry key="#{T(org.developers.model.Users.Rights).CREATE_DOCUMENT}" value="true"/>
+                <entry key="#{T(org.developers.model.Users.Rights).SAVE_DOCUMENT}" value="true"/>
+                <entry key="#{T(org.developers.model.Users.Rights).WRITE_DOCUMENT}" value="true"/>
+                <entry key="#{T(org.developers.model.Users.Rights).CANCELED_WRITE_OF_DOCUMENT}" value="false"/>
+                <entry key="#{T(org.developers.model.Users.Rights).DELETE_DOCUMENT}" value="true"/>
+            </map>
         </constructor-arg>
     </bean>
     <!--Миронов - внедренеи ролей}-->
