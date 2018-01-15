@@ -4,11 +4,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--Миронов - Внедрение ролей{-->
+
+    <bean
+            id="propertyConfigurer"
+            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+            p:location="database.connection.properties"/>
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-          p:driverClassName="org.postgresql.Driver"
-          p:url="jdbc:postgresql://localhost:5432/bookstore"
-          p:username="admin"
-          p:password="admin"/>
+          p:driverClassName="${prostgresql.driverclassname}"
+          p:url="${porstgresql.url}"
+          p:username="${postgresql.user}"
+          p:password="${postrgesql.password}"/>
 
     <bean id="person" class="org.developers.Person">
         <constructor-arg ref="dataSource"/>

@@ -26,14 +26,14 @@ public class Employee extends Person {
     //todo: имеет право выполнять только админситратор
     public void diffRole(Role role) {
         Optional<Role> roleOptional = Optional.of(role);
-        ApplicationContext cxtOfRole = new ClassPathXmlApplicationContext("roles.xml");
+        ApplicationContext cxtOfRole = new ClassPathXmlApplicationContext("users/roles.xml");
         this.role = roleOptional.orElse(cxtOfRole.getBean("untitled", Role.class));
     }
 
     //todo: имеет право выполнять только директор
     public void diffPosition(Position position) {
         Optional<Position> positionOptional = Optional.of(position);
-        ApplicationContext cxtOfRole = new ClassPathXmlApplicationContext("positions.xml");
+        ApplicationContext cxtOfRole = new ClassPathXmlApplicationContext("users/positions.xml");
         this.position = positionOptional.orElse(cxtOfRole.getBean("untitled", Position.class));
     }
 

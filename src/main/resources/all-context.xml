@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--Миронов - Внедрение ролей{-->
-    <import resource="roles.xml"/>
-    <import resource="positions.xml"/>
+    <import resource="users/roles.xml"/>
+    <import resource="users/positions.xml"/>
     <!--Миронов - Внедрение ролей}-->
 
 </beans>
