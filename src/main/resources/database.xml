@@ -4,21 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--Миронов - Внедрение ролей{-->
-
+    <!--получаем настройки соединения с БД с внешнего файла настроек-->
     <bean
             id="propertyConfigurer"
             class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
             p:location="database.connection.properties"/>
 
+    <!--"устанавливаем соединение"-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="${prostgresql.driverclassname}"
           p:url="${porstgresql.url}"
           p:username="${postgresql.user}"
           p:password="${postrgesql.password}"/>
 
-    <bean id="person" class="org.developers.Person">
-        <constructor-arg ref="dataSource"/>
-    </bean>
     <!--Миронов - Внедрение ролей}-->
 
 </beans>
