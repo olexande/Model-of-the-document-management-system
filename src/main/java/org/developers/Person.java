@@ -47,9 +47,12 @@ public class Person {
     public Person getPerson(long id){
         Person person = null;
         String query = "SELECT LASTNAME, FIRSTNAME, PATRONYMIC, BIRTHDAY FROM PERSON WHERE ID=?";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(query, id);
-        person = new Person(result.get(0).get("lastname").toString(), result.get(0).get("firstname").toString(), result.get(0).get("patronymic").toString(), result.get(0).get("birthday").toString());
-        //Optional<Person> personOptional = Optional.of(person);
+        try{
+            List<Map<String, Object>> result = jdbcTemplate.queryForList(query, id);
+            person = new Person(result.get(0).get("lastname").toString(), result.get(0).get("firstname").toString(), result.get(0).get("patronymic").toString(), result.get(0).get("birthday").toString());
+        }catch(IndexOutOfBoundsException ex){
+            person = new Person("НЕ НАЙДЕНО", "НЕ НАЙДЕНО", "НЕ НАЙДЕНО", "НЕ НАЙДЕНО");
+        }
         return person;
     }
 
