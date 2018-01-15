@@ -2,19 +2,22 @@ package org.developers.system;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
-
+//класс, содержащий методы рабоыт с логами
 public class LogOfSystem {
+    //запись лога
     public static void writeLog(LogType type, String message) {
         //todo: определить каталог приложения
-        try (FileWriter fw = new FileWriter("M:\\base\\logs")) {
+        //имя лога: текущая дата. При необходимости записи добавляются в файл
+        try (FileWriter fw = new FileWriter("M:/base/logs/" + LocalDate.now() + ".log", true)) {
             Optional<LogType> typeOptional = Optional.of(type);
             Optional<String> messageOptional = Optional.of(message);
-            fw.write(LocalDateTime.now() + "\t" + typeOptional.orElse(LogType.EMPTY) + "\t" + messageOptional.orElse("сообщений нет") + "\n");
+            fw.write(LocalTime.now() + "\t" + typeOptional.orElse(LogType.EMPTY) + "\t" + messageOptional.orElse("сообщений нет") + "\n");
             fw.flush();
         } catch (IOException ex) {
-            System.out.println("Не удалось запистаь файл лога");
+            System.out.println("Не удалось записать файл лога");
         }
     }
 }
