@@ -34,7 +34,13 @@ public class Cashbox {
     public void closeCheck() {
         //вывод чека на экран
         //формировнаие файла XML
+
+        diifToBase();
         totalSum = 0;
         list.clear();
+    }
+
+    private void diifToBase(){
+
     }
 }
