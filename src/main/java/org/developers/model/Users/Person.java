@@ -25,11 +25,10 @@ public class Person {
     private JdbcTemplate jdbcTemplate;
 
     public Person(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setDataSource(dataSource);
+        jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    Person(String lastname, String firstname, String patronymic, LocalDate birthday) {
+    private Person(String lastname, String firstname, String patronymic, LocalDate birthday) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.patronymic = patronymic;
