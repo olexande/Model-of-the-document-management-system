@@ -15,10 +15,6 @@
           p:url="${porstgresql.url}"
           p:username="${postgresql.user}"
           p:password="${postrgesql.password}"/>
-
-    <bean id="person" class="org.developers.Person">
-        <constructor-arg ref="dataSource"/>
-    </bean>
     <!--Миронов - Внедрение ролей}-->
 
 </beans>

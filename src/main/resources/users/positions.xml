@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!--Миронов - Внедрение ролей{-->
-    <bean id="untitled" class="org.developers.model.Users.Position"
-          p:title="пустышка"/>
-    <bean id="director" class="org.developers.model.Users.Position"
-          p:title="директор"/>
-    <bean id="accountant" class="org.developers.model.Users.Position"
-          p:title="бухгалтер"/>
-    <bean id="manager-store" class="org.developers.model.Users.Position"
-          p:title="управляющий торговой точкой"/>
-    <bean id="admin" class="org.developers.model.Users.Position"
-          p:title="администратор"/>
-    <!--Миронов - внедренеи ролей}-->
+    <!--определяем должности-->
+    <!--rule: всемогущий администратор-->
+    <bean id="admin" class="org.developers.model.Employee.Position"
+          p:title="admin"
+          p:place="OFFICE">
+        <property name="rigths">
+            <map>
+                <entry key="LOGIN" value="true"/>
+                <entry key="CREATE_DOCUMENT" value="true"/>
+                <entry key="SAVE_DOCUMENT" value="true"/>
+                <entry key="WRITE_DOCUMENT" value="true"/>
+                <entry key="CANCELLATION_OF_THE_DOCUMENT_WIRING" value="true"/>
+                <entry key="DELETE_DOCUMENT" value="true"/>
+            </map>
+        </property>
+    </bean>
+    <!--Миронов - Внедрение ролей}-->
 
 </beans>
