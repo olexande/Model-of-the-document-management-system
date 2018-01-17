@@ -48,7 +48,14 @@ public class Cashbox {
     }
 
     public void addProduct(String name, int count) {
-        list.put(new Product().foundProduct(name), count);
+        Product product = new Product();
+        if (product.getProductTitle().equals(name)) {
+            totalSum += product.getProductPrice();
+            productCout += count;
+            list.put(product.foundProduct(name), count);
+        }
+        else
+            System.out.println("товар не найден");
     }
 
     public void pay(Check check) {
@@ -58,7 +65,6 @@ public class Cashbox {
     public boolean verification(Check check) {
         return true;
     }
-
 
     private void diffToBase(){
 
