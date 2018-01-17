@@ -2,11 +2,15 @@ package org.developers.model;
 
 //служебная информация
 public class ServiceData {
+
+    private static String title;
+    private static String adress;
+
     public static String getTitle(){
-        return null;
+        return title;
     }
 
-    public static String getAddress(){
-        return null;
+    public static String getAdress(){
+        return adress;
     }
 }
