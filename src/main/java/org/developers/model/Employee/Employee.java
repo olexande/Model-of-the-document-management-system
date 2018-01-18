@@ -12,6 +12,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/*desc: Пояснение работы класса Employee
+ *
+ *desc: Поля типов Person и Position автоматически связываются, т.е. объекты этих полей уже созданы, и они автоматически
+ *desc: привязываются. Т.о., чтобы изменить значения свойств этих полей, нужно действовать не внутри класс Employee, а извне
+ *
+ *desc: При добавлении сотрудника в БД особых хлопот нет. Однако, мы должны быть уверены, что поля класса проинициализированы
+ *desc: и связаны. Поэтому был создан класс, при создании которого выбрасывается исключение
+ *
+ *desc: Предлагаю самостоятельно изучить метод получения объекта текущего (getEmployee()) класса по ID из БД
+ *
+ *desc: Методы diffEmployee() и deleteEmployee() по своей работе аналогичны методам класса Person
+ * */
 //сотрудник
 public class Employee {
     @Autowired
@@ -57,12 +69,14 @@ public class Employee {
             }
             employee = new Employee(personWork.getPerson((long) result.get(0).get("id_person")), positionWork);
         } catch (IndexOutOfBoundsException ex) {
+
             //rule: определение правил для задания ФИО в случае ошибки запроса
             //rule: фамилия: "БЕЗ ФАМИЛИИ"
             //rule: имя: "БЕЗ ИМЕНИ"
             //rule: отчество: "БЕЗ ОТЧЕСТВА"
             //rule: день рождения: "31 декабря 3000 г."
-            employee = new Employee(new Person("БЕЗ ФАМИЛИИ", "БЕЗ ИМЕНИ", "БЕЗ ОТЧЕСТВА", LocalDate.of(31, 12, 3000)), new Position());
+
+            employee = new Employee(new Person("БЕЗ ФАМИЛИИ", "БЕЗ ИМЕНИ", "БЕЗ ОТЧЕСТВА", LocalDate.of(3000, 12, 31)), new Position());
         }
         return employee;
     }
