@@ -11,6 +11,24 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.StringTokenizer;
 
+/*desc: Пояснение работы класса Person
+
+ * desc: При создании объекта сразу инициализируется связь с БД (см. кл. JdbcTemplate и DataSource.
+ *
+ * desc: Стоит обратить внимание на конструкторы. Модификаторы доступа были установлены именно такими в связи с
+ * desc: спецификой работы с классом Employee
+ *
+ * desc: Метод add() заносит данные в БД. Причём стоит обратить внимание на свод правил в случае null-значений
+ *
+ * desc: Метод getPerson() позволяет получить объект класса Person по id из БД (считаю, что лучше объект, нежели
+ * desc: отдельные значения
+ *
+ * desc: Метод diiPerson() предназначен для изменения данных в БД. В качестве параемтров указываются имя изменяемого поля
+ * desc: (прописан в соответствующем Enum), значение и ID
+ *
+ * desc: Метод deletePerson() позволяет удалить запись из БД по ID
+ *
+ * desc: Бонус: метод getName() возвращает полные ФИО, или же фамилию с инициалами*/
 //персона
 public class Person {
     @Getter
@@ -49,7 +67,14 @@ public class Person {
         Optional<String> patronymicOptional = Optional.ofNullable(patronymic);
         Optional<LocalDate> birthdayOptional = Optional.ofNullable(birthday);
         String query = "INSERT INTO PERSON(LASTNAME, FIRSTNAME, PATRONYMIC, BIRTHDAY) VALUES(?,?,?,?)";
-        jdbcTemplate.update(query, lastnameOptional.orElse("ФАМИЛИЯ"), firstnameOptional.orElse("ИМЯ"), patronymicOptional.orElse("ОТЧЕСТВО"), Date.valueOf(birthdayOptional.orElse(LocalDate.of(3000, 12, 12))));
+
+        //rule: определение правил для задания ФИО в случае ошибки запроса
+        //rule: фамилия: "БЕЗ ФАМИЛИИ"
+        //rule: имя: "БЕЗ ИМЕНИ"
+        //rule: отчество: "БЕЗ ОТЧЕСТВА"
+        //rule: день рождения: "31 декабря 3000 г."
+
+        jdbcTemplate.update(query, lastnameOptional.orElse("БЕЗ ФАМИЛИИ"), firstnameOptional.orElse("БЕЗ ИМЕНИ"), patronymicOptional.orElse("БЕЗ ОТЧЕСТВА"), Date.valueOf(birthdayOptional.orElse(LocalDate.of(3000, 12, 12))));
     }
 
     public Person getPerson(long id) {
