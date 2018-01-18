@@ -22,17 +22,25 @@ public class Person {
     @Getter
     private LocalDate birthday;
 
+    @Getter
+    private long id;
+
     private JdbcTemplate jdbcTemplate;
 
     public Person(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private Person(String lastname, String firstname, String patronymic, LocalDate birthday) {
+    public Person(String lastname, String firstname, String patronymic, LocalDate birthday) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.patronymic = patronymic;
         this.birthday = birthday;
+    }
+
+    private Person(String lastname, String firstname, String patronymic, LocalDate birthday, long id) {
+        this(lastname, firstname, patronymic, birthday);
+        this.id = id;
     }
 
     public void add(String lastname, String firstname, String patronymic, LocalDate birthday) {
@@ -46,7 +54,7 @@ public class Person {
 
     public Person getPerson(long id) {
         Person person;
-        String query = "SELECT LASTNAME, FIRSTNAME, PATRONYMIC, BIRTHDAY FROM PERSON WHERE ID=?";
+        String query = "SELECT ID, LASTNAME, FIRSTNAME, PATRONYMIC, BIRTHDAY FROM PERSON WHERE ID=?";
         try {
             List<Map<String, Object>> result = jdbcTemplate.queryForList(query, id);
             //attention: можешь лучше? Сделай!{
@@ -59,7 +67,7 @@ public class Person {
                 i++;
             }
             //attention: можешь лучше? Сделай!}
-            person = new Person(result.get(0).get("lastname").toString(), result.get(0).get("firstname").toString(), result.get(0).get("patronymic").toString(), LocalDate.of(dateArray[0], dateArray[1], dateArray[2]));
+            person = new Person(result.get(0).get("lastname").toString(), result.get(0).get("firstname").toString(), result.get(0).get("patronymic").toString(), LocalDate.of(dateArray[0], dateArray[1], dateArray[2]), (Long) result.get(0).get("id"));
         } catch (IndexOutOfBoundsException ex) {
 
             //rule: определение правил для задания ФИО в случае ошибки запроса
@@ -81,24 +89,12 @@ public class Person {
         jdbcTemplate.update(queryUpdate, valueOptional.orElse("DEFAULT"), id >= 1 ? id : 1);
     }
 
-    public void diffPerson(String query) {
-        if (query != null)
-            jdbcTemplate.update(query);
-        //запись в лог
-    }
-
     //todo: только администратор
     public void deletePerson(FieldOfPerson fieldSearch, String value) {
         Optional<FieldOfPerson> fieldSearchOptional = Optional.ofNullable(fieldSearch);
         Optional<String> valueOptional = Optional.ofNullable(value);
         String queryUpdate = "DELETE FROM PERSON WHERE " + fieldSearchOptional.orElse(FieldOfPerson.LASTNAME).toString() + "=?";
         jdbcTemplate.update(queryUpdate, valueOptional.orElse("DEFAULT"));
-    }
-
-    public void deletePerson(String query) {
-        if (query != null)
-            jdbcTemplate.update(query);
-        //запись в лог
     }
 
     //для более удобного представления имени

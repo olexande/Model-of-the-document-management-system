@@ -1,16 +1,18 @@
 package org.developers.model.Employee;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import org.developers.model.Users.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 //сотрудник
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Employee {
     @Autowired
     public Person person;
@@ -19,44 +21,64 @@ public class Employee {
 
     private JdbcTemplate jdbcTemplate;
 
-    public Employee(DataSource dataSource){
+    public Employee(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void addEmployee(){
-        //attention: если данные Person и Position не заполнены - вызываем исключение!
+    private Employee(Person person, Position position) {
+        this.person = person;
+        this.position = position;
     }
 
-    //attention: на реализацию
-//    public Employee getEmployee(long id){
-//        return new Employee(new Person());
-//    }
+    public void addEmployee() throws EmployeeException {
+        //todo: если данные Person и Position не заполнены - вызываем исключение!
+        if (person != null && position != null) {
+            String queryInsert = "INSERT INTO EMPLOYEE(ID_PERSON, POSITION) VALUES(?,?)";
+            jdbcTemplate.update(queryInsert, person.getId() >= 1 ? person.getId() : 1, position.getPlace());
+        } else
+            throw new EmployeeException("не заполнены свойства \"Person\" и/или \"Position\"");
+    }
+
+    public Employee getEmployee(long id) {
+        Employee employee;
+        String query = "SELECT ID_PERSON, POSITION FROM EMPLOYEE WHERE ID=?";
+        try {
+            List<Map<String, Object>> result = jdbcTemplate.queryForList(query, id);
+            ApplicationContext cxt = new ClassPathXmlApplicationContext("all-context.xml");
+            Person personWork = cxt.getBean("person", Person.class);
+            ApplicationContext ctxPositions = new ClassPathXmlApplicationContext("users/positions.xml");
+            Position positionWork = null;
+            //attention: добработать
+            switch (result.get(0).get("position").toString()) {
+                case "admin": {
+                    positionWork = ctxPositions.getBean("admin", Position.class);
+                    break;
+                }
+            }
+            employee = new Employee(personWork.getPerson((long) result.get(0).get("id_person")), positionWork);
+        } catch (IndexOutOfBoundsException ex) {
+            //rule: определение правил для задания ФИО в случае ошибки запроса
+            //rule: фамилия: "БЕЗ ФАМИЛИИ"
+            //rule: имя: "БЕЗ ИМЕНИ"
+            //rule: отчество: "БЕЗ ОТЧЕСТВА"
+            //rule: день рождения: "31 декабря 3000 г."
+            employee = new Employee(new Person("БЕЗ ФАМИЛИИ", "БЕЗ ИМЕНИ", "БЕЗ ОТЧЕСТВА", LocalDate.of(31, 12, 3000)), new Position());
+        }
+        return employee;
+    }
 
     //todo: только администратор
-    public void diffEmployee(Person person, long id) {
-        Optional<Person> fieldOptional = Optional.ofNullable(person);
-        //attention: создать фейковоого Person
-        String queryUpdate = "UPDATE PERSON SET " + fieldOptional.orElse(FieldOfEmployee.LASTNAME).toString() + "=? WHERE ID=?";
-        jdbcTemplate.update(queryUpdate, valueOptional.orElse("DEFAULT"), id >= 1 ? id : 1);
+    public void diffEmployee(EmployeeFiled field, Object value, long id) {
+        Optional<EmployeeFiled> fieldOptional = Optional.ofNullable(field);
+        Optional<Object> valueOptional = Optional.ofNullable(value);
+        String queryUpdate = "UPDATE employee SET " + fieldOptional.orElse(EmployeeFiled.PERSON) + "=? WHERE ID=?";
+        jdbcTemplate.update(queryUpdate, valueOptional.orElse(0), id >= 1 ? id : 1); //attention: т.е. будет ошибка
     }
 
-    public void diffEmployee(String query) {
-        if (query != null)
-            jdbcTemplate.update(query);
-        //запись в лог
-    }
 
     //todo: только администратор
-    public void deleteEmployee(Person person) {
-        Optional<Person> fieldOptional = Optional.ofNullable(person);
-        //attention: создать фейковоого Person
-        String queryUpdate = "DELETE FROM PERSON WHERE " + fieldSearchOptional.orElse(FieldOfEmployee.LASTNAME).toString() + "=?";
-        jdbcTemplate.update(queryUpdate, valueOptional.orElse("DEFAULT"));
-    }
-
-    public void deleteEmployeen(String query) {
-        if (query != null)
-            jdbcTemplate.update(query);
-        //запись в лог
+    public void deleteEmployee(long id) {
+        String queryUpdate = "DELETE FROM PERSON WHERE ID=?";
+        jdbcTemplate.update(queryUpdate, id >= 1 ? id : 0); //attention: т.е. будет ошибка
     }
 }

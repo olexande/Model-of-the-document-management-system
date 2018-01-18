@@ -13,7 +13,9 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="employee" class="org.developers.model.Employee.Employee"/>
+    <bean id="employee" class="org.developers.model.Employee.Employee">
+        <constructor-arg ref="dataSource"/>
+    </bean>
     <!--Миронов - Внедрение ролей}-->
 
 </beans>
