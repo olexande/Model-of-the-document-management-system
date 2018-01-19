@@ -1,7 +1,7 @@
 package org.developers.model.Product;
 
 //товар
-public interface Product {
+public interface Product<Count extends Number> {
     String getTitle();
 
     //закупочная цена
@@ -9,4 +9,13 @@ public interface Product {
 
     //розничная цена
     double getRetailPrice();
+
+    //увеличить остаток
+    void plusBalance(Count quantity);
+
+    //уменшить остаток
+    void minusBalance(Count quantity);
+
+    //получить текущий остаток
+    Count getBalance();
 }
