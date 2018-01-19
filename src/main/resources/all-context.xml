@@ -7,7 +7,7 @@
     <!--Миронов - Внедрение ролей{-->
     <context:annotation-config/>
 
-    <import resource="database.xml"/>
+    <import resource="/connectDB/market.xml"/>
 
     <bean id="person" class="org.developers.model.Users.Person">
         <constructor-arg ref="dataSource"/>
