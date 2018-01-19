@@ -14,9 +14,8 @@ public class Book implements Product, ProductDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    @Setter
-    /*наименование товара*/
-    private String title;
+    //данные товара
+    private String titleOfProduct;
 
     //данные книги
     private String titleOFBook;
@@ -31,7 +30,7 @@ public class Book implements Product, ProductDAO {
 
     @Override
     public String getTitle() {
-        return title;
+        return null;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Start {
         //rule: ############################
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext("all-context.xml");
-        Person personWork = ctx.getBean("person", Person.class);
-        System.out.println(personWork.getPerson(1).getFirstname());
+
+
     }
 }
