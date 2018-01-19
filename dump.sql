@@ -201,7 +201,7 @@ CREATE TABLE "position" (
 ALTER TABLE "position" OWNER TO admin;
 
 --
--- Name: Product; Type: TABLE; Schema: public; Owner: admin
+-- Name: product; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE product (
@@ -259,7 +259,7 @@ ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::reg
 
 
 --
--- Name: Product id; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: product id; Type: DEFAULT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY product ALTER COLUMN id SET DEFAULT nextval('product_id_seq'::regclass);
@@ -327,7 +327,7 @@ COPY "position" (title, place) FROM stdin;
 
 
 --
--- Data for Name: Product; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY product (id, title, purchase_price, retail_price) FROM stdin;
@@ -382,7 +382,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: Product product_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: product product_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY product
