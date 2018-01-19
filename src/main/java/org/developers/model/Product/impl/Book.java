@@ -1,7 +1,6 @@
 package org.developers.model.Product.impl;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import org.developers.model.Product.Product;
 import org.developers.model.Product.ProductDAO;
 
@@ -9,13 +8,9 @@ import java.util.List;
 
 @AllArgsConstructor
 public class Book implements Product, ProductDAO {
-
-    @Setter
-    private String title;
-
     @Override
     public String getTitle() {
-        return title;
+        return null;
     }
 
     @Override
@@ -51,6 +46,11 @@ public class Book implements Product, ProductDAO {
     @Override
     public long getId() {
         return 0;
+    }
+
+    @Override
+    public Product getProduct(long id) {
+        return null;
     }
 
     @Override

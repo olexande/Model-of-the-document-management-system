@@ -11,6 +11,9 @@ public interface ProductDAO {
     //получение id (кода)
     long getId();
 
+    //полученеи продукта по id (коду)
+    Product getProduct(long id);
+
     //получение списка всех товаров
     List<Product> getAll();
 }
