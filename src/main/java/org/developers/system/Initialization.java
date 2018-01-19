@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 //Миронов - Внедрение  документов и отчётов{
 //первоначальная инициализация
 public class Initialization {
@@ -47,7 +48,12 @@ public class Initialization {
         //папка с документами
         boolean createFolderDocuments = new File(path + "//base//documents//").mkdir();
         //todo: при желании - раскомментировать
-        //System.out.println(createFolderDocuments ? "Папка \"documents\" создана" : "Папка \"documents\" не создана");
+        System.out.println(createFolderDocuments ? "Папка \"documents\" создана" : "Папка \"documents\" не создана");
+
+        //папка с логами
+        boolean createFolderLogs = new File(path + "//base//logs//").mkdir();
+        //todo: при желании - раскомментировать
+        System.out.println(createFolderDocuments ? "Папка \"logs\" создана" : "Папка \"logs\" не создана");
     }
 }
 ///Миронов - Внедрение  документов и отчётов}
