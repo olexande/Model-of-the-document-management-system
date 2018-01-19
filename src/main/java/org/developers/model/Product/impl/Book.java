@@ -1,16 +1,37 @@
 package org.developers.model.Product.impl;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.developers.model.Product.Product;
 import org.developers.model.Product.ProductDAO;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.List;
+import javax.sql.DataSource;
+import java.util.ArrayList;
 
 @AllArgsConstructor
 public class Book implements Product, ProductDAO {
+
+    private JdbcTemplate jdbcTemplate;
+
+    @Setter
+    /*наименование товара*/
+    private String title;
+
+    //данные книги
+    private String titleOFBook;
+    private String author;
+    private short numberOfPage;
+    private String publishigHouse;
+
+
+    public Book(DataSource dataSource){
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
     @Override
     public String getTitle() {
-        return null;
+        return title;
     }
 
     @Override
@@ -54,7 +75,7 @@ public class Book implements Product, ProductDAO {
     }
 
     @Override
-    public List<Product> getAll() {
+    public ArrayList<Product> getAll() {
         return null;
     }
 }
