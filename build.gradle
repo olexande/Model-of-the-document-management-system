@@ -1,0 +1,25 @@
+group 'org.developers'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '4.12'
+    springVersion = '4.3.12.RELEASE'
+    lombokVersion = '1.16.20'
+    postgresDriver = '9.1-901-1.jdbc4'
+}
+
+dependencies {
+    testCompile 'junit:junit:' + rootProject.ext.junitVersion
+    compile 'org.springframework:spring-context:' + rootProject.ext.springVersion
+    compile 'org.springframework:spring-jdbc:' + rootProject.ext.springVersion
+    compileOnly 'org.projectlombok:lombok:' + rootProject.ext.lombokVersion
+    compile 'postgresql:postgresql:' + rootProject.ext.postgresDriver
+}

@@ -1,4 +1,4 @@
+.gradle
 .idea/
-target/
-test/
-*.iml
+build/
+out/

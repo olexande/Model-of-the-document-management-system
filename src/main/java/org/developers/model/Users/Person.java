@@ -101,7 +101,7 @@ public class Person {
             //rule: отчество: "БЕЗ ОТЧЕСТВА"
             //rule: день рождения: "31 декабря 3000 г."
 
-            person = new Person("БЕЗ ФАМИЛИИ", "БЕЗ ИМЕНИ", "БЕЗ ОТЧЕСТВА", LocalDate.of(31, 12, 3000));
+            person = new Person("БЕЗ ФАМИЛИИ", "БЕЗ ИМЕНИ", "БЕЗ ОТЧЕСТВА", LocalDate.of(3000, 12, 31));
         }
         return person;
     }
