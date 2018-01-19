@@ -1,4 +1,4 @@
-package org.developers.system;
+package org.developers.system.Log;
 
 import java.io.FileWriter;
 import java.io.IOException;
