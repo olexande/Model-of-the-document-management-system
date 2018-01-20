@@ -109,30 +109,30 @@ public class Book implements Product, ProductDAO {
 
     @Override
     public void plusBalance(int quantity) {
-        quantity = quantity >= 1 ? quantity : 0;
-        String queryUpdate = "UPDATE PRODUCT SET BALANCE=" + getBalance() + quantity + " WHERE (SELECT ID_PRODUCT FROM BOOK WHERE book.id_product=product.id AND book.id_product=?)=ID";
+        quantity = getBalance() + (quantity >= 1 ? quantity : 0);
+        String queryUpdate = "UPDATE PRODUCT SET BALANCE=? WHERE ID=(SELECT ID_PRODUCT FROM BOOK WHERE book.id=?)";
         try {
-            jdbcTemplate.update(queryUpdate, id);
+            jdbcTemplate.update(queryUpdate, quantity, id);
         } catch (IndexOutOfBoundsException ex) {
-            //attention: лог обо ошибке
+            //attention: лог об ошибке
         }
     }
 
     @Override
     public void minusBalance(int quantity) {
-        quantity = quantity >= 1 ? quantity : 0;
-        String queryUpdate = "UPDATE PRODUCT SET BALANCE=" + getBalance() - quantity + " WHERE (SELECT ID_PRODUCT FROM BOOK WHERE book.id_product=product.id AND book.id_product=?)=ID";
+        quantity = getBalance() - (quantity >= 1 ? quantity : 0);
+        String queryUpdate = "UPDATE PRODUCT SET BALANCE=? WHERE ID=(SELECT ID_PRODUCT FROM BOOK WHERE book.id=?)";
         try {
-            jdbcTemplate.update(queryUpdate, id);
+            jdbcTemplate.update(queryUpdate, quantity, id);
         } catch (IndexOutOfBoundsException ex) {
-            //attention: лог обо ошибке
+            //attention: лог об ошибке
         }
     }
 
     @Override
     public int getBalance() {
         int balance = 0;
-        String query = "SELECT PRODUCT.BALANCE FROM PRODUCT INNER JOIN BOOK ON BOOK.ID_PRODUCT=PRODUCT.ID AND BOOK.ID=?";
+        String query = "SELECT PRODUCT.BALANCE FROM PRODUCT INNER JOIN BOOK ON PRODUCT.ID=BOOK.id_product AND book.id=?;";
         try {
             List<Map<String, Object>> result = jdbcTemplate.queryForList(query, id);
             balance = (int) result.get(0).get("balance");
