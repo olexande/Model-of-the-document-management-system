@@ -1,6 +1,5 @@
 package org.developers.model.Product.impl;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -109,18 +108,38 @@ public class Book implements Product, ProductDAO {
     }
 
     @Override
-    public void plusBalance(Number quantity) {
-
+    public void plusBalance(int quantity) {
+        quantity = quantity >= 1 ? quantity : 0;
+        String queryUpdate = "UPDATE PRODUCT SET BALANCE=" + getBalance() + quantity + " WHERE (SELECT ID_PRODUCT FROM BOOK WHERE book.id_product=product.id AND book.id_product=?)=ID";
+        try {
+            jdbcTemplate.update(queryUpdate, id);
+        } catch (IndexOutOfBoundsException ex) {
+            //attention: лог обо ошибке
+        }
     }
 
     @Override
-    public void minusBalance(Number quantity) {
-
+    public void minusBalance(int quantity) {
+        quantity = quantity >= 1 ? quantity : 0;
+        String queryUpdate = "UPDATE PRODUCT SET BALANCE=" + getBalance() - quantity + " WHERE (SELECT ID_PRODUCT FROM BOOK WHERE book.id_product=product.id AND book.id_product=?)=ID";
+        try {
+            jdbcTemplate.update(queryUpdate, id);
+        } catch (IndexOutOfBoundsException ex) {
+            //attention: лог обо ошибке
+        }
     }
 
     @Override
-    public Number getBalance() {
-        return null;
+    public int getBalance() {
+        int balance = 0;
+        String query = "SELECT PRODUCT.BALANCE FROM PRODUCT INNER JOIN BOOK ON BOOK.ID_PRODUCT=PRODUCT.ID AND BOOK.ID=?";
+        try {
+            List<Map<String, Object>> result = jdbcTemplate.queryForList(query, id);
+            balance = (int) result.get(0).get("balance");
+        } catch (IndexOutOfBoundsException ex) {
+            balance = -1;
+        }
+        return balance;
     }
 
     @Override

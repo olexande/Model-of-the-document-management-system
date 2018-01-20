@@ -3,7 +3,7 @@ package org.developers.model.Product;
 import java.math.BigDecimal;
 
 //товар
-public interface Product<Count extends Number> {
+public interface Product {
     String getTitle();
 
     //закупочная цена
@@ -13,11 +13,11 @@ public interface Product<Count extends Number> {
     BigDecimal getRetailPrice();
 
     //увеличить остаток
-    void plusBalance(Count quantity);
+    void plusBalance(int quantity);
 
     //уменшить остаток
-    void minusBalance(Count quantity);
+    void minusBalance(int quantity);
 
     //получить текущий остаток
-    Count getBalance();
+    int getBalance();
 }
