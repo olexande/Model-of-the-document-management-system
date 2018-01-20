@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	   					   http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="/connectDB/data/database.market.connection.properties"/>
+    <bean id="yamlReader" class="org.developers.system.YamlReader">
+        <constructor-arg value="M:\Projects\Bookstore\src\main\resources\connectDB\config.yml"/>
+    </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-          p:driverClassName="${prostgresql.driverclassname}"
-          p:url="${porstgresql.url}"
-          p:username="${postgresql.user}"
-          p:password="${postrgesql.password}"/>
+          p:driverClassName='#{yamlReader.read().get("database").get("bookstore").get("driverclassname")}'
+          p:url='#{yamlReader.read().get("database").get("bookstore").get("url")}'
+          p:username='#{yamlReader.read().get("database").get("bookstore").get("user")}'
+          p:password='#{yamlReader.read().get("database").get("bookstore").get("password")}'/>
 
 </beans>

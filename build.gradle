@@ -14,6 +14,7 @@ ext {
     springVersion = '4.3.12.RELEASE'
     lombokVersion = '1.16.20'
     postgresDriver = '9.1-901-1.jdbc4'
+    snakeymlVersion = '1.19'
 }
 
 dependencies {
@@ -22,4 +23,5 @@ dependencies {
     compile 'org.springframework:spring-jdbc:' + rootProject.ext.springVersion
     compileOnly 'org.projectlombok:lombok:' + rootProject.ext.lombokVersion
     compile 'postgresql:postgresql:' + rootProject.ext.postgresDriver
+    compile 'org.yaml:snakeyaml:' + rootProject.ext.snakeymlVersion
 }

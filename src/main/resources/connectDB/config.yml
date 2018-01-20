@@ -1,0 +1,15 @@
+ #параметры для соединения с БД
+ database:
+      #драйвер, пользователь и пароль
+      main: &data
+            driverclassname: org.postgresql.Driver
+            user: admin
+            password: admin
+      #торговая точка
+      bookstore:
+            <<: *data
+            url: &link jdbc:postgresql://localhost:5432/bookstore
+      #бухгалтерия
+      accountancy:
+            <<: *data
+            url: jdbc:postgresql://localhost:5432/accountancy
