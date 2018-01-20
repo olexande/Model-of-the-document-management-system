@@ -1,14 +1,16 @@
 package org.developers.model.Product;
 
+import java.math.BigDecimal;
+
 //товар
 public interface Product<Count extends Number> {
     String getTitle();
 
     //закупочная цена
-    double getPurchasePrice();
+    BigDecimal getPurchasePrice();
 
     //розничная цена
-    double getRetailPrice();
+    BigDecimal getRetailPrice();
 
     //увеличить остаток
     void plusBalance(Count quantity);
