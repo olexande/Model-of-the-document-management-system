@@ -1,6 +1,6 @@
 package org.developers.model.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 
 //Интерфейс работы с БД
 /*desc: Набор этих абстрактных методов НЕ ДОЛЖЕН меняться*/
@@ -15,5 +15,5 @@ public interface ProductDAO {
     Product getProduct(long id);
 
     //получение списка всех товаров
-    ArrayList<Product> getAll();
+    List<Product> getAll();
 }

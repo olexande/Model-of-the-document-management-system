@@ -131,15 +131,14 @@ public class Book implements Product, ProductDAO {
 
     @Override
     public int getBalance() {
-        int balance = 0;
         String query = "SELECT PRODUCT.BALANCE FROM PRODUCT INNER JOIN BOOK ON PRODUCT.ID=BOOK.id_product AND book.id=?;";
         try {
             List<Map<String, Object>> result = jdbcTemplate.queryForList(query, id);
-            balance = (int) result.get(0).get("balance");
+            this.balance = (int) result.get(0).get("balance");
         } catch (IndexOutOfBoundsException ex) {
-            balance = -1;
+            this.balance = -1;
         }
-        return balance;
+        return this.balance;
     }
 
     @Override
@@ -184,7 +183,32 @@ public class Book implements Product, ProductDAO {
     }
 
     @Override
-    public ArrayList<Product> getAll() {
-        return null;
+    public List<Product> getAll() {
+        ArrayList<Product> result = new ArrayList<>();
+        String queryAll = "SELECT\n" +
+                "  PRODUCT.TITLE AS TITLE_OF_PRODUCT,\n" +
+                "  PRODUCT.PURCHASE_PRICE,\n" +
+                "  PRODUCT.retail_price,\n" +
+                "  PRODUCT.BALANCE,\n" +
+                "  BOOK.TITLE AS TITLE_OF_BOOK,\n" +
+                "  BOOK.AUTHOR,\n" +
+                "  BOOK.NUMBER_PAGE,\n" +
+                "  BOOK.PUBLISHING_HOUSE,\n" +
+                "  BOOK.TYPE_OF_BINDING\n" +
+                "FROM PRODUCT\n" +
+                "  INNER JOIN BOOK ON PRODUCT.ID = BOOK.ID_PRODUCT;";
+        List<Map<String, Object>> buf = jdbcTemplate.queryForList(queryAll);
+        buf.forEach(record -> {
+            result.add(new Book(record.get("title_of_product").toString(),
+                    (BigDecimal) record.get("purchase_price"),
+                    (BigDecimal) record.get("retail_price"),
+                    (int) record.get("balance"),
+                    record.get("title_of_book").toString(),
+                    record.get("author").toString(),
+                    Short.valueOf(record.get("number_page").toString()),
+                    record.get("publishing_house").toString(),
+                    record.get("type_of_binding").toString()));
+        });
+        return result;
     }
 }
