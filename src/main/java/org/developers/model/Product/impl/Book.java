@@ -23,9 +23,13 @@ public class Book implements Product, ProductDAO {
     private long id;
 
     //данные товара
+    @Setter
     private String titleOfProduct;
+    @Setter
     private BigDecimal purchasePrice;
+    @Setter
     private BigDecimal retailPrice;
+    @Setter
     private int balance;
 
     //данные книги
@@ -143,7 +147,16 @@ public class Book implements Product, ProductDAO {
 
     @Override
     public void add() {
-
+        jdbcTemplate.update("INSERT INTO PRODUCT(TITLE) VALUES(?)", titleOfProduct);
+        String queryInsertBook = "INSERT INTO BOOK(TITLE, AUTHOR, NUMBER_PAGE, PUBLISHING_HOUSE, TYPE_OF_BINDING, ID_PRODUCT) VALUES(?,?,?,?,?,?)";
+        List<Map<String, Object>> idProduct = jdbcTemplate.queryForList("SELECT MAX(ID) AS ID FROM PRODUCT");
+        jdbcTemplate.update(queryInsertBook,
+                titleOfBook,
+                author,
+                numberOfPage,
+                publishingHouse,
+                binding.getType(),
+                idProduct.get(0).get("id"));
     }
 
     @Override
