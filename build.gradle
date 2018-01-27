@@ -20,7 +20,7 @@ task gradleWrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
 }
 
-//внутренние совйства
+//внутренние свойства
 ext {
     junitVersion = '4.12'
     springVersion = '4.3.12.RELEASE'
@@ -96,3 +96,4 @@ class Releaseproject extends DefaultTask {
 task makeProjectRelease(type: Releaseproject){
     difFile = file('version.properties')
 }
+
